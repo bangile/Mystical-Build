@@ -1,0 +1,6 @@
+{
+  "name": "Mystical Construction And Renovation",
+  "description": "Pretoria & Gauteng's premier construction, new home building, architectural renovations, and building materials specialists.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
