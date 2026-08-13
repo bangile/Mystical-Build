@@ -15,6 +15,7 @@ import { TestimonialsSection } from './components/TestimonialsSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
+import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { Project } from './types';
 
 export default function App() {
@@ -118,6 +119,9 @@ export default function App() {
 
       {/* Footer */}
       <Footer />
+
+      {/* Floating Smart WhatsApp Widget */}
+      <FloatingWhatsApp />
 
       {/* Interactive Project Case Study Modal */}
       {selectedProject && (
