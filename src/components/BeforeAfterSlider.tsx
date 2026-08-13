@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { motion } from 'motion/react';
 import { Sparkles, MoveHorizontal, Check, Clock, MapPin } from 'lucide-react';
 import { BEFORE_AFTER_ITEMS } from '../data/mockData';
+import { fadeInUp, scaleUp } from '../utils/animations';
 
 export const BeforeAfterSlider: React.FC = () => {
   const [activeItemIndex, setActiveItemIndex] = useState(0);
@@ -50,27 +52,33 @@ export const BeforeAfterSlider: React.FC = () => {
   return (
     <section 
       id="before-after"
-      className="py-20 sm:py-28 bg-[#f8f9fa] border-b border-[#e1e3e4]"
+      className="py-10 sm:py-14 bg-[#f8f9fa] border-b border-[#e1e3e4] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffe088]/40 border border-[#d4af37]/40 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-4">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={fadeInUp}
+          className="text-center max-w-3xl mx-auto mb-6 sm:mb-8"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffe088]/40 border border-[#d4af37]/40 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-3">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Transformative Renovations</span>
           </div>
           <h2 
             id="before-after-heading"
-            className="font-heading font-bold text-3xl sm:text-4xl text-[#191c1d] tracking-tight"
+            className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-[#191c1d] tracking-tight"
           >
             Before & After Architectural Overhauls
           </h2>
-          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4 mb-5 rounded-full" />
-          <p className="text-[#4d4635] text-base leading-relaxed">
+          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-3 mb-3 rounded-full" />
+          <p className="text-[#4d4635] text-sm sm:text-base leading-relaxed">
             Drag the comparison slider to experience how we re-engineer outdated structures into breathtaking contemporary masterpieces.
           </p>
 
           {/* Project Switcher Tabs */}
-          <div className="flex flex-wrap justify-center gap-2 mt-8">
+          <div className="flex flex-wrap justify-center gap-2 mt-5">
             {BEFORE_AFTER_ITEMS.map((item, idx) => (
               <button
                 key={item.id}
@@ -79,7 +87,7 @@ export const BeforeAfterSlider: React.FC = () => {
                   setActiveItemIndex(idx);
                   setSliderPosition(50);
                 }}
-                className={`px-4 py-2 rounded text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded text-xs sm:text-sm font-semibold transition-all cursor-pointer ${
                   activeItemIndex === idx
                     ? 'bg-[#d4af37] text-[#241a00] shadow-sm'
                     : 'bg-white text-[#4d4635] border border-stone-200 hover:border-stone-400'
@@ -89,10 +97,16 @@ export const BeforeAfterSlider: React.FC = () => {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Interactive Comparison Container */}
-        <div className="bg-white rounded-lg border border-[#e1e3e4] shadow-lg overflow-hidden p-4 sm:p-8">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={scaleUp}
+          className="bg-white rounded-lg border border-[#e1e3e4] shadow-lg overflow-hidden p-4 sm:p-6"
+        >
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Visual Slider (8 columns) */}
@@ -207,8 +221,9 @@ export const BeforeAfterSlider: React.FC = () => {
             </div>
 
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 };
+

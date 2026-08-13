@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Home, Building2, Wrench, Shield, Layers, Zap, Truck, CheckCircle2, ArrowRight, X, Phone, MessageCircle } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Home, Building2, Wrench, Shield, Layers, Zap, Truck, CheckCircle2, ArrowRight, X, Phone, FileText } from 'lucide-react';
 import { SERVICES, BUILDING_MATERIALS_LIST, BUSINESS_INFO } from '../data/mockData';
 import { ServiceExpertise } from '../types';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 interface ExpertiseSectionProps {
   onSelectServiceForQuote: (serviceTitle: string) => void;
@@ -34,33 +36,39 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ onSelectServ
   return (
     <section 
       id="expertise"
-      className="py-20 sm:py-28 bg-[#f8f9fa] border-b border-[#e1e3e4]"
+      className="py-10 sm:py-14 bg-[#f8f9fa] border-b border-[#e1e3e4] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffe088]/30 border border-[#d4af37]/40 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-4">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={fadeInUp}
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-10"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ffe088]/30 border border-[#d4af37]/40 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-3">
             <span>Pretoria Building & Renovation Specialists</span>
           </div>
 
           <h2 
             id="expertise-heading"
-            className="font-heading font-bold text-3xl sm:text-4xl text-[#191c1d] tracking-tight"
+            className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-[#191c1d] tracking-tight"
           >
             Comprehensive Construction Services
           </h2>
           {/* Gold Accent Bar */}
-          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4 mb-6 rounded-full" />
-          <p className="text-[#4d4635] text-base sm:text-lg leading-relaxed">
+          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-3 mb-4 rounded-full" />
+          <p className="text-[#4d4635] text-sm sm:text-base leading-relaxed">
             From complete new home builds and major structural alterations to roofing, aluminium installations, and direct building material supplies in Pretoria.
           </p>
 
           {/* Toggle between Construction Services & Building Materials Supply */}
-          <div className="flex justify-center gap-3 mt-8">
+          <div className="flex justify-center gap-3 mt-5 sm:mt-6">
             <button
               onClick={() => setActiveTab('construction')}
-              className={`px-5 py-2.5 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all cursor-pointer ${
+              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all cursor-pointer ${
                 activeTab === 'construction'
                   ? 'bg-[#191c1d] text-white shadow-md'
                   : 'bg-white text-[#4d4635] border border-stone-200 hover:border-stone-400'
@@ -70,7 +78,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ onSelectServ
             </button>
             <button
               onClick={() => setActiveTab('materials')}
-              className={`px-5 py-2.5 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full text-xs font-heading font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
                 activeTab === 'materials'
                   ? 'bg-[#d4af37] text-[#241a00] shadow-md font-extrabold'
                   : 'bg-white text-[#4d4635] border border-stone-200 hover:border-stone-400'
@@ -80,14 +88,22 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ onSelectServ
               <span>Building Materials & Sand Supply</span>
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Tab 1: Construction & Renovation Services Grid */}
         {activeTab === 'construction' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          <motion.div 
+            variants={staggerContainer(0.09, 0.05)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px' }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7"
+          >
             {SERVICES.map((service) => (
-              <div
+              <motion.div
                 key={service.id}
+                variants={fadeInUp}
+                whileHover={{ y: -4, transition: { duration: 0.25 } }}
                 id={`service-card-${service.id}`}
                 className="bg-white rounded-lg p-7 sm:p-8 border border-[#e1e3e4] hover:border-[#d4af37]/60 shadow-[0_4px_20px_rgba(44,62,80,0.04)] hover:shadow-[0_12px_30px_rgba(44,62,80,0.08)] transition-all duration-300 flex flex-col justify-between group relative"
               >
@@ -147,14 +163,19 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ onSelectServ
                     Request Quote
                   </button>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
 
         {/* Tab 2: Building Materials Supply */}
         {activeTab === 'materials' && (
-          <div className="space-y-8 animate-in fade-in duration-300">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-8"
+          >
             <div className="bg-white rounded-lg p-8 sm:p-10 border border-[#e1e3e4] shadow-sm">
               <div className="max-w-3xl mb-8">
                 <span className="text-xs font-heading font-bold uppercase tracking-widest text-[#735c00] block mb-2">
@@ -170,8 +191,9 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ onSelectServ
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                 {BUILDING_MATERIALS_LIST.map((mat, idx) => (
-                  <div 
+                  <motion.div 
                     key={idx}
+                    whileHover={{ y: -3 }}
                     className="p-5 rounded-lg bg-[#f8f9fa] border border-[#e1e3e4] flex flex-col justify-between"
                   >
                     <div>
@@ -189,17 +211,15 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ onSelectServ
                     </div>
                     <div className="mt-4 pt-3 border-t border-stone-200 flex items-center justify-between text-xs">
                       <span className="text-[#7f7663]">Direct delivery available</span>
-                      <a 
-                        href={`https://wa.me/27618607883?text=Hi%20Mystical%20Construction,%20please%20send%20pricing%20for%20${encodeURIComponent(mat.name)}%20delivery%20in%20Pretoria.`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="font-semibold text-[#15803d] hover:underline flex items-center gap-1"
+                      <button 
+                        onClick={() => onSelectServiceForQuote(`Building Materials: ${mat.name}`)}
+                        className="font-semibold text-[#735c00] hover:underline flex items-center gap-1 cursor-pointer"
                       >
-                        <MessageCircle className="w-3 h-3" />
-                        <span>Order via WhatsApp</span>
-                      </a>
+                        <span>Request Pricing</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </button>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -210,7 +230,7 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ onSelectServ
                     Need Bulk Tipper Delivery on Your Site Today?
                   </h4>
                   <p className="text-stone-300 text-xs sm:text-sm">
-                    Call <strong>061 860 7883</strong> or WhatsApp <strong>067 855 2358</strong> for immediate dispatch pricing and volume discounts.
+                    Call <strong>061 860 7883</strong> or <strong>067 855 2358</strong> for immediate dispatch pricing and volume discounts.
                   </p>
                 </div>
                 <div className="flex gap-3 w-full sm:w-auto shrink-0">
@@ -221,91 +241,101 @@ export const ExpertiseSection: React.FC<ExpertiseSectionProps> = ({ onSelectServ
                     <Phone className="w-3.5 h-3.5 text-[#d4af37]" />
                     <span>Call Now</span>
                   </a>
-                  <a
-                    href={BUSINESS_INFO.whatsappUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex-1 sm:flex-initial px-5 py-3 rounded bg-[#25D366] hover:bg-[#20bd5a] text-white font-heading font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5"
+                  <button
+                    onClick={() => onSelectServiceForQuote('Bulk Tipper Building Materials Order')}
+                    className="flex-1 sm:flex-initial px-5 py-3 rounded bg-[#d4af37] hover:bg-[#c49f2b] text-[#241a00] font-heading font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 cursor-pointer shadow"
                   >
-                    <MessageCircle className="w-3.5 h-3.5" />
-                    <span>WhatsApp Quote</span>
-                  </a>
+                    <FileText className="w-3.5 h-3.5" />
+                    <span>Get Free Quote</span>
+                  </button>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         )}
 
       </div>
 
       {/* Service Detail Modal */}
-      {selectedModalService && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div 
-            className="bg-white max-w-2xl w-full rounded-lg shadow-2xl p-6 sm:p-8 border border-[#e1e3e4] relative max-h-[90vh] overflow-y-auto"
-            role="dialog"
-            aria-modal="true"
+      <AnimatePresence>
+        {selectedModalService && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
           >
-            <button
-              onClick={() => setSelectedModalService(null)}
-              className="absolute top-5 right-5 p-2 rounded-full hover:bg-stone-100 text-stone-500 hover:text-black transition-colors"
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0, y: 15 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 15 }}
+              transition={{ duration: 0.25 }}
+              className="bg-white max-w-2xl w-full rounded-lg shadow-2xl p-6 sm:p-8 border border-[#e1e3e4] relative max-h-[90vh] overflow-y-auto"
+              role="dialog"
+              aria-modal="true"
             >
-              <X className="w-5 h-5" />
-            </button>
-
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-lg bg-[#ffe088]/40 flex items-center justify-center text-[#735c00]">
-                {getIcon(selectedModalService.icon)}
-              </div>
-              <div>
-                <span className="text-xs uppercase tracking-widest font-semibold text-[#735c00]">
-                  {selectedModalService.tagline}
-                </span>
-                <h3 className="font-heading font-bold text-2xl text-[#191c1d]">
-                  {selectedModalService.title}
-                </h3>
-              </div>
-            </div>
-
-            <p className="text-[#4d4635] text-base leading-relaxed mb-6">
-              {selectedModalService.description}
-            </p>
-
-            <div className="bg-[#f8f9fa] p-5 rounded-lg border border-[#e1e3e4] mb-6">
-              <h4 className="font-heading font-semibold text-sm uppercase tracking-wider text-[#191c1d] mb-3">
-                South African Building & Engineering Standards
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-[#4e6073]">
-                {selectedModalService.features.map((feat, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0" />
-                    <span>{feat}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3 justify-end pt-4 border-t border-stone-200">
               <button
                 onClick={() => setSelectedModalService(null)}
-                className="px-5 py-2.5 rounded border border-stone-300 text-stone-700 text-sm font-medium hover:bg-stone-50"
+                className="absolute top-5 right-5 p-2 rounded-full hover:bg-stone-100 text-stone-500 hover:text-black transition-colors cursor-pointer"
               >
-                Close
+                <X className="w-5 h-5" />
               </button>
-              <button
-                onClick={() => {
-                  const serviceTitle = selectedModalService.title;
-                  setSelectedModalService(null);
-                  onSelectServiceForQuote(serviceTitle);
-                }}
-                className="px-6 py-2.5 rounded bg-[#d4af37] hover:bg-[#c49f2b] text-[#241a00] font-heading font-bold text-xs uppercase tracking-wider shadow cursor-pointer"
-              >
-                Request Free Quote
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 rounded-lg bg-[#ffe088]/40 flex items-center justify-center text-[#735c00]">
+                  {getIcon(selectedModalService.icon)}
+                </div>
+                <div>
+                  <span className="text-xs uppercase tracking-widest font-semibold text-[#735c00]">
+                    {selectedModalService.tagline}
+                  </span>
+                  <h3 className="font-heading font-bold text-2xl text-[#191c1d]">
+                    {selectedModalService.title}
+                  </h3>
+                </div>
+              </div>
+
+              <p className="text-[#4d4635] text-base leading-relaxed mb-6">
+                {selectedModalService.description}
+              </p>
+
+              <div className="bg-[#f8f9fa] p-5 rounded-lg border border-[#e1e3e4] mb-6">
+                <h4 className="font-heading font-semibold text-sm uppercase tracking-wider text-[#191c1d] mb-3">
+                  South African Building & Engineering Standards
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-[#4e6073]">
+                  {selectedModalService.features.map((feat, i) => (
+                    <div key={i} className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-[#d4af37] shrink-0" />
+                      <span>{feat}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 justify-end pt-4 border-t border-stone-200">
+                <button
+                  onClick={() => setSelectedModalService(null)}
+                  className="px-5 py-2.5 rounded border border-stone-300 text-stone-700 text-sm font-medium hover:bg-stone-50 cursor-pointer"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() => {
+                    const serviceTitle = selectedModalService.title;
+                    setSelectedModalService(null);
+                    onSelectServiceForQuote(serviceTitle);
+                  }}
+                  className="px-6 py-2.5 rounded bg-[#d4af37] hover:bg-[#c49f2b] text-[#241a00] font-heading font-bold text-xs uppercase tracking-wider shadow cursor-pointer"
+                >
+                  Request Free Quote
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
+

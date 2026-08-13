@@ -372,7 +372,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: '1',
-    name: 'Johan van der Merwe',
+    name: 'Mark S.',
     role: 'Homeowner, Waterkloof Ridge',
     project: 'Full House Renovation & Roofing',
     quote: 'Mystical Construction completely transformed our Waterkloof home. Phillip and the team were punctual, transparent with costs in Rands, and completed our roofing and aluminium doors ahead of schedule. Outstanding workmanship in Pretoria!',
@@ -382,7 +382,7 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     id: '2',
-    name: 'Nomsa Khumalo',
+    name: 'Kimberly K',
     role: 'Property Investor, Centurion',
     project: 'New House Build & Paving',
     quote: 'From foundation casting to the final plastering and painting, Mystical Build delivered exceptional quality. Having them supply the bricks and sand directly saved us thousands. Highly recommended for any building project in Gauteng!',
@@ -392,7 +392,7 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     id: '3',
-    name: 'Tiaan Botha',
+    name: 'Tiaan B.',
     role: 'Commercial Operations Manager, Menlyn',
     project: 'Office Partitioning & Ceilings',
     quote: 'We hired Mystical Construction for commercial drywall partitioning and suspended ceilings in Menlyn. The attention to acoustic detail and neatness was world-class. Free quotation was spot-on with no hidden surprise costs.',

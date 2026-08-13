@@ -1,6 +1,8 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Compass, FileCode2, HardHat, Key, Check } from 'lucide-react';
 import { PROCESS_STEPS } from '../data/mockData';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 export const ProcessSection: React.FC = () => {
   const getStepIcon = (idx: number) => {
@@ -16,33 +18,47 @@ export const ProcessSection: React.FC = () => {
   return (
     <section 
       id="process"
-      className="py-20 sm:py-28 bg-[#f8f9fa] border-b border-[#e1e3e4]"
+      className="py-10 sm:py-14 bg-[#f8f9fa] border-b border-[#e1e3e4] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f3f4f5] border border-[#d0c5af]/50 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-4">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={fadeInUp}
+          className="text-center max-w-3xl mx-auto mb-6 sm:mb-8"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f3f4f5] border border-[#d0c5af]/50 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-3">
             <span>Rigorous Methodology</span>
           </div>
 
           <h2 
             id="process-heading"
-            className="font-heading font-bold text-3xl sm:text-4xl text-[#191c1d] tracking-tight"
+            className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-[#191c1d] tracking-tight"
           >
             The 4-Stage Master Build Process
           </h2>
-          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4 mb-5 rounded-full" />
-          <p className="text-[#4d4635] text-base leading-relaxed">
+          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-3 mb-3 rounded-full" />
+          <p className="text-[#4d4635] text-sm sm:text-base leading-relaxed">
             From initial topographical surveying to white-glove handover, every phase is engineered with transparent milestones and strict quality assurance.
           </p>
-        </div>
+        </motion.div>
 
-        {/* 4 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 4 Steps Grid with Staggered Entrance */}
+        <motion.div 
+          variants={staggerContainer(0.12, 0.05)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {PROCESS_STEPS.map((step, idx) => (
-            <div
+            <motion.div
               key={step.stepNumber}
+              variants={fadeInUp}
+              whileHover={{ y: -5, transition: { duration: 0.25 } }}
               id={`process-step-${step.stepNumber}`}
               className="bg-white rounded-lg p-6 sm:p-7 border border-[#e1e3e4] hover:border-[#d4af37]/70 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group"
             >
@@ -91,11 +107,12 @@ export const ProcessSection: React.FC = () => {
                   <span className="font-semibold text-[#191c1d]">{step.durationEstimate}</span>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
       </div>
     </section>
   );
 };
+

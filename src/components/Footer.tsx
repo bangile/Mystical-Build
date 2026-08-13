@@ -10,30 +10,30 @@ export const Footer: React.FC = () => {
   return (
     <footer id="main-footer" className="bg-[#111315] text-stone-300 border-t border-stone-800">
       {/* Top Banner / Statement */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 border-b border-stone-800/80">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 border-b border-stone-800/80">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           <div>
-            <div className="flex items-center gap-2 text-[#d4af37] mb-2">
-              <Compass className="w-6 h-6" />
-              <span className="font-heading font-extrabold text-xl tracking-wider uppercase text-white">
+            <div className="flex items-center gap-2 text-[#d4af37] mb-1.5">
+              <Compass className="w-5 h-5 sm:w-6 sm:h-6" />
+              <span className="font-heading font-extrabold text-lg sm:text-xl tracking-wider uppercase text-white">
                 MYSTICAL <span className="text-[#d4af37]">BUILD</span>
               </span>
             </div>
-            <p className="text-stone-400 text-sm max-w-lg">
+            <p className="text-stone-400 text-xs sm:text-sm max-w-lg">
               Pretoria & Gauteng's premier construction, new turnkey home builds, structural renovations, and direct building materials supplier.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
             <a
               href="#contact"
-              className="px-6 py-3 rounded bg-[#d4af37] hover:bg-[#c49f2b] text-[#241a00] font-heading font-bold text-xs uppercase tracking-wider transition-colors shadow"
+              className="px-5 py-2.5 rounded bg-[#d4af37] hover:bg-[#c49f2b] text-[#241a00] font-heading font-bold text-xs uppercase tracking-wider transition-colors shadow"
             >
               Get Free Quotation
             </a>
             <a
               href="#portfolio"
-              className="px-6 py-3 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 font-heading font-medium text-xs uppercase tracking-wider transition-colors border border-stone-700"
+              className="px-5 py-2.5 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 font-heading font-medium text-xs uppercase tracking-wider transition-colors border border-stone-700"
             >
               Explore Portfolio
             </a>
@@ -42,7 +42,7 @@ export const Footer: React.FC = () => {
       </div>
 
       {/* Main Footer Links */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           
           {/* Col 1 & 2: About & South African Yard */}

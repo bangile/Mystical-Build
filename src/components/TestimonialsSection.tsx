@@ -1,39 +1,55 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Star, ShieldCheck, Award, Building, CheckCircle2 } from 'lucide-react';
 import { TESTIMONIALS } from '../data/mockData';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 export const TestimonialsSection: React.FC = () => {
   return (
     <section 
       id="reviews"
-      className="py-20 sm:py-28 bg-white border-b border-[#e1e3e4]"
+      className="py-10 sm:py-14 bg-white border-b border-[#e1e3e4] overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f3f4f5] border border-[#d0c5af]/50 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-4">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={fadeInUp}
+          className="text-center max-w-3xl mx-auto mb-6 sm:mb-8"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f3f4f5] border border-[#d0c5af]/50 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-3">
             <Award className="w-3.5 h-3.5" />
             <span>Client Endorsements & Reviews</span>
           </div>
 
           <h2 
             id="reviews-heading"
-            className="font-heading font-bold text-3xl sm:text-4xl text-[#191c1d] tracking-tight"
+            className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-[#191c1d] tracking-tight"
           >
             Trusted by Pretoria Property Owners & Developers
           </h2>
-          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4 mb-5 rounded-full" />
-          <p className="text-[#4d4635] text-base leading-relaxed">
+          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-3 mb-3 rounded-full" />
+          <p className="text-[#4d4635] text-sm sm:text-base leading-relaxed">
             Our reputation is built on structural precision, transparent Rand quotations, and dependable delivery across Gauteng.
           </p>
-        </div>
+        </motion.div>
 
         {/* Testimonials 3-Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+        <motion.div 
+          variants={staggerContainer(0.1, 0.05)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-10"
+        >
           {TESTIMONIALS.map((testimonial) => (
-            <div
+            <motion.div
               key={testimonial.id}
+              variants={fadeInUp}
+              whileHover={{ y: -4, transition: { duration: 0.25 } }}
               id={`testimonial-card-${testimonial.id}`}
               className="bg-[#f8f9fa] rounded-lg p-7 sm:p-8 border border-[#e1e3e4] hover:border-[#d4af37]/60 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between"
             >
@@ -71,12 +87,18 @@ export const TestimonialsSection: React.FC = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* South African Accreditations & Standards Bar */}
-        <div className="bg-[#edeeef] rounded-lg p-6 sm:p-8 border border-[#d0c5af]/50">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+          variants={fadeInUp}
+          className="bg-[#edeeef] rounded-lg p-6 sm:p-8 border border-[#d0c5af]/50"
+        >
           <div className="text-center text-xs font-heading font-bold uppercase tracking-widest text-[#735c00] mb-6">
             South African Building Accreditations & Compliance
           </div>
@@ -102,9 +124,10 @@ export const TestimonialsSection: React.FC = () => {
               <span className="text-[11px] text-[#7f7663]">Electrical & Plumbing Sign-Off</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>
   );
 };
+

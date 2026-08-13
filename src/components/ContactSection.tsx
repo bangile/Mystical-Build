@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'motion/react';
 import { Mail, Phone, MapPin, Clock, Send, CheckCircle2, ExternalLink, Navigation } from 'lucide-react';
 import { BUSINESS_INFO } from '../data/mockData';
+import { fadeInUp, staggerContainer } from '../utils/animations';
 
 interface ContactSectionProps {
   prefilledNotes?: string;
@@ -37,33 +39,45 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledNotes }
   return (
     <section 
       id="contact"
-      className="py-20 sm:py-28 bg-[#edeeef] border-b border-[#d0c5af]/50"
+      className="py-10 sm:py-14 bg-[#edeeef] border-b border-[#d0c5af]/50 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#d0c5af]/50 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-4 shadow-2xs">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={fadeInUp}
+          className="text-center max-w-3xl mx-auto mb-6 sm:mb-8"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#d0c5af]/50 text-[#735c00] text-xs font-semibold uppercase tracking-wider mb-3 shadow-2xs">
             <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
             <span>259 Ketjen St, Pretoria West • Free On-Site Consultations</span>
           </div>
 
           <h2 
             id="contact-heading"
-            className="font-heading font-bold text-3xl sm:text-4xl text-[#191c1d] tracking-tight"
+            className="font-heading font-bold text-2xl sm:text-3xl lg:text-4xl text-[#191c1d] tracking-tight"
           >
             Contact Mystical Construction
           </h2>
-          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-4 mb-5 rounded-full" />
-          <p className="text-[#4d4635] text-base leading-relaxed">
+          <div className="w-16 h-1 bg-[#d4af37] mx-auto mt-3 mb-3 rounded-full" />
+          <p className="text-[#4d4635] text-sm sm:text-base leading-relaxed">
             Ready to build, renovate, or order building materials? Reach out directly via phone, email, or request a comprehensive free on-site quotation across Pretoria and Gauteng.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <motion.div 
+          variants={staggerContainer(0.12, 0.05)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start"
+        >
           
           {/* Left Column: Direct Business Contact & Google Maps Identity (5 Cols) */}
-          <div className="lg:col-span-5 space-y-6">
+          <motion.div variants={fadeInUp} className="lg:col-span-5 space-y-6">
             
             {/* Quick Action Contact Card */}
             <div className="bg-white rounded-lg p-6 sm:p-8 border border-[#e1e3e4] shadow-sm">
@@ -207,10 +221,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledNotes }
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Free On-Site Consultation & Quotation Form (7 Cols) */}
-          <div className="lg:col-span-7 bg-white rounded-lg p-6 sm:p-8 border border-[#e1e3e4] shadow-sm">
+          <motion.div variants={fadeInUp} className="lg:col-span-7 bg-white rounded-lg p-6 sm:p-8 border border-[#e1e3e4] shadow-sm">
             <div className="mb-6">
               <span className="text-xs font-heading font-bold uppercase tracking-widest text-[#735c00] block mb-1">
                 South African Inquiries
@@ -396,11 +410,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ prefilledNotes }
                 </button>
               </form>
             )}
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>
   );
 };
+
