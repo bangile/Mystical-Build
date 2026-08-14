@@ -96,7 +96,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenConsultation, activeSectio
             <span className={`text-[9px] tracking-[0.22em] uppercase font-medium -mt-1 ${
               isScrolled ? 'text-[#7f7663]' : 'text-stone-300'
             }`}>
-              Construction & Renovation • Pretoria
+              Construction & Renovation
             </span>
           </div>
         </a>

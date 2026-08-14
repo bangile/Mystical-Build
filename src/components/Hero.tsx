@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, ShieldCheck, MapPin, FileText } from 'lucide-react';
+import { ArrowRight, ShieldCheck, FileText } from 'lucide-react';
 import { fadeInUp, staggerContainer, luxuryEase } from '../utils/animations';
 
 interface HeroProps {
@@ -47,16 +47,6 @@ export const Hero: React.FC<HeroProps> = ({ onExplorePortfolio, onOpenConsultati
         className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full text-center flex flex-col items-center justify-center my-auto"
       >
         
-        {/* Location & Architectural Badge */}
-        <motion.div 
-          variants={fadeInUp}
-          id="hero-architectural-badge"
-          className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-[#d4af37]/40 text-[#f5df97] text-xs font-semibold uppercase tracking-widest mb-4 sm:mb-5"
-        >
-          <MapPin className="w-3.5 h-3.5 text-[#d4af37]" />
-          <span>Pretoria West • Serving Pretoria & Greater Gauteng</span>
-        </motion.div>
-
         {/* Display Headline */}
         <motion.h1 
           variants={fadeInUp}
